@@ -30,7 +30,7 @@ const Home = () => {
       onMouseMove={handleMouseMove}
     >
       <h1 style={{ fontFamily: 'Merriweather', fontSize: '50px' }}>James Senior</h1>
-      <p className="subheading">I'm a 4<sup>th</sup> year student at Northeastern University studying Computer Science.</p>
+      <p className="subheading">I'm a Computer Science graduate from Northeastern University.</p>
       <div><p className="type">Welcome to my website.</p></div>
       <img
         className="photo"
