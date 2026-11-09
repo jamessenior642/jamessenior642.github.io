@@ -9,11 +9,10 @@
     filter: brightness(2); /* Increase the brightness */
   }
   
-  /* Fill the visible screen. svh accounts for in-app browser toolbars (e.g. Instagram),
-     and the top padding keeps content clear of the fixed navbar. */
+  /* Fill the visible screen. --hero-h is the screen height measured in Home.js (it ignores
+     in-app browser toolbars hiding on scroll), and the top padding clears the fixed navbar. */
   .home-hero {
-    min-height: 100vh;
-    min-height: 100svh;
+    min-height: var(--hero-h, 100svh);
     padding-top: var(--nav-h);
     padding-bottom: 16px;
   }
@@ -21,14 +20,18 @@
   .photo {
     border-radius: 50%; /* Optional: Make the image round */
     width: auto;
-    height: min(335px, 40svh); /* Full size on most screens, shrinks on short ones */
+    height: min(335px, calc(var(--hero-h, 100svh) * 0.4)); /* Full size on most screens, shrinks on short ones */
   }
 
   .subheading {
-    font-size: 1.3em;
+    font-size: min(1.3em, 4.6vw); /* shrinks on phones so "I'm a software engineer in QA," fits on one line */
     /* font-weight: 400; */
-    max-width: 80%;
+    max-width: 95%;
 
+  }
+
+  .subheading .nowrap {
+    white-space: nowrap;
   }
 
   @keyframes fadeIn {
@@ -81,24 +84,22 @@
     font-weight: 600; /* Merriweather loads as a variable font, so in-between weights work */
   }
 
-  /* Short screens (phones in landscape, in-app browsers like Instagram) */
-  @media (max-height: 600px) {
-    .home-name {
-      font-size: 40px;
-      margin-bottom: 4px;
-    }
+  /* Short screens (phones in landscape, in-app browsers like Instagram). Set by Home.js
+     from the measured height, so it doesn't flip on and off as toolbars hide on scroll. */
+  .home-hero.is-short .home-name {
+    font-size: 40px;
+    margin-bottom: 4px;
+  }
 
-    .subheading {
-      font-size: 1.1em;
-      max-width: 90%;
-      margin-bottom: 8px;
-    }
+  .home-hero.is-short .subheading {
+    font-size: min(1.1em, 4.6vw);
+    margin-bottom: 8px;
+  }
 
-    .type {
-      margin-bottom: 8px;
-    }
+  .home-hero.is-short .type {
+    margin-bottom: 8px;
+  }
 
-    .home-hero .links {
-      margin-top: 12px !important; /* overrides Bootstrap's mt-4 */
-    }
+  .home-hero.is-short .links {
+    margin-top: 12px !important; /* overrides Bootstrap's mt-4 */
   }
