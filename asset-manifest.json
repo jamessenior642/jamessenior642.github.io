@@ -1,8 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.e61d20e4.css",
-    "main.js": "/static/js/main.55fe3441.js",
+    "main.css": "/static/css/main.c7fb3216.css",
+    "main.js": "/static/js/main.bc769654.js",
+    "static/js/725.facf435a.chunk.js": "/static/js/725.facf435a.chunk.js",
     "static/js/453.195b869a.chunk.js": "/static/js/453.195b869a.chunk.js",
+    "static/js/241.f5dbb524.chunk.js": "/static/js/241.f5dbb524.chunk.js",
     "static/media/goodlove.wav": "/static/media/goodlove.1db613355d8e4d7371a1.wav",
     "static/media/mamabeat2.wav": "/static/media/mamabeat2.1d833385dd0592c7a25a.wav",
     "static/media/makobeat.wav": "/static/media/makobeat.63de59427e6a58ad90d8.wav",
@@ -20,12 +22,14 @@
     "static/media/freecell2.jpg": "/static/media/freecell2.d5958b7aab093081302e.jpg",
     "static/media/concentrationpic2.jpg": "/static/media/concentrationpic2.6984ed0542cac7c571fc.jpg",
     "index.html": "/index.html",
-    "main.e61d20e4.css.map": "/static/css/main.e61d20e4.css.map",
-    "main.55fe3441.js.map": "/static/js/main.55fe3441.js.map",
-    "453.195b869a.chunk.js.map": "/static/js/453.195b869a.chunk.js.map"
+    "main.c7fb3216.css.map": "/static/css/main.c7fb3216.css.map",
+    "main.bc769654.js.map": "/static/js/main.bc769654.js.map",
+    "725.facf435a.chunk.js.map": "/static/js/725.facf435a.chunk.js.map",
+    "453.195b869a.chunk.js.map": "/static/js/453.195b869a.chunk.js.map",
+    "241.f5dbb524.chunk.js.map": "/static/js/241.f5dbb524.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e61d20e4.css",
-    "static/js/main.55fe3441.js"
+    "static/css/main.c7fb3216.css",
+    "static/js/main.bc769654.js"
   ]
 }
