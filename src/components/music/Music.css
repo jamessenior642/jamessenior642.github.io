@@ -28,6 +28,7 @@
   }
 
   .turntable {
+    container-type: inline-size; /* lets the play button scale with the turntable */
     position: relative;
     width: 100%;
     max-width: 560px;
@@ -121,12 +122,15 @@
 
   .turntable-button {
     position: absolute;
-    left: 3.5%;
-    bottom: 5%;
+    /* Sized and placed relative to the turntable so it stays in the empty corner
+       below the platter at any size, instead of overlapping the record on small screens */
+    left: 2.5%;
+    bottom: 3%;
     z-index: 3;
-    padding: 3px 12px;
+    padding: 0.2em 0.9em;
     font-family: 'Roboto Mono', monospace;
-    font-size: 0.8rem;
+    font-size: clamp(9px, 2.6cqi, 0.8rem);
+    line-height: 1.4;
     font-weight: 500;
     color: #111;
     background: #fff;
