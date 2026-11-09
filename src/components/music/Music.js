@@ -1,37 +1,42 @@
 import React from 'react';
-import { Row, Col, Card } from 'react-bootstrap';
 import BodySection from '../bodysection/BodySection';
 import { FaSoundcloud, FaInstagram, FaSpotify } from 'react-icons/fa';
+import RecordPlayer from './RecordPlayer';
 import goodlove from '../../songs/goodlove.wav';
 import softly from '../../songs/softly.wav';
 import mamabeat2 from '../../songs/mamabeat2.wav';
 import makobeat from '../../songs/makobeat.wav';
 import './Music.css'; 
 
+// Oldest to newest (left to right in the sleeve fan)
 const musicData = [
   {
-    title: 'Goodluv',
-    date: 'September 2022',
-    samples: 'Good Love by Anita Baker',
-    audioSrc: goodlove,
-  },
-  {
-    title: 'Softly',
-    date: 'December 2021',
-    samples: 'Killing Me Softly With His Song by Roberta Flack',
-    audioSrc: softly,
+    title: 'Mako',
+    date: 'July 2021',
+    samples: 'September Rain by Makoto Matsushita',
+    audioSrc: makobeat,
+    color: '#1E9E5A', // green
   },
   {
     title: 'Days',
     date: 'November 2021',
     samples: 'Ayonha by Hamid Al Shaeri',
     audioSrc: mamabeat2,
+    color: '#E0362C', // red
   },
   {
-    title: 'Mako',
-    date: 'July 2021',
-    samples: 'September Rain by Makoto Matsushita',
-    audioSrc: makobeat,
+    title: 'Softly',
+    date: 'December 2021',
+    samples: 'Killing Me Softly With His Song by Roberta Flack',
+    audioSrc: softly,
+    color: '#4A73F0', // blue (light enough for black text on the sleeve)
+  },
+  {
+    title: 'Goodluv',
+    date: 'September 2022',
+    samples: 'Good Love by Anita Baker',
+    audioSrc: goodlove,
+    color: '#F8D000', // yellow, same as the site accent
   },
 ];
 
@@ -52,26 +57,7 @@ const Music = () => {
           <FaSpotify size={30} />
         </a>
       </div>
-      <Row>
-        {musicData.map((music, index) => (
-          <Col lg={6} key={index} className="mb-4">
-            <Card className="h-100 music-card">
-              <Card.Header>
-                <Card.Title className='fw-bold'>{music.title}</Card.Title>
-              </Card.Header>
-              <Card.Body>
-                <audio controls className="audio-player">
-                  <source src={music.audioSrc} type="audio/wav" />
-                </audio>
-                <Card.Text>Samples: {music.samples}</Card.Text>
-              </Card.Body>
-              <Card.Footer>
-                <small className="text-muted">{music.date}</small>
-              </Card.Footer>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      <RecordPlayer tracks={musicData} />
     </BodySection>
   );
 };

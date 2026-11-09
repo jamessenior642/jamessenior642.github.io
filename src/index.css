@@ -22,21 +22,17 @@ body, html {
   font-weight: 700;
 }
 
-/* Shared card style for Projects and Music */
-.project-card,
-.music-card {
+/* Project card style */
+.project-card {
   border: 1px solid var(--ink);
   transition: transform 0.3s ease;
 }
 
-.project-card:hover,
-.music-card:hover {
+.project-card:hover {
   transform: scale(1.05);
 }
 
-.project-card .card-footer,
-.music-card .card-header,
-.music-card .card-footer {
+.project-card .card-footer {
   background-color: var(--surface);
   border-color: var(--line);
 }

@@ -1,23 +1,376 @@
+/* Card text sizes (these apply site-wide, including the Projects cards) */
 .card-title {
-  
+
     font-size: 1.25rem;
   }
-  
+
   .card-text {
 
     font-size: 1rem;
   }
-  
-  .card-footer {
-  
-    font-size: 0.875rem;
-  }
 
-  .audio-player {
-    width: 100%;
+  .card-footer {
+
+    font-size: 0.875rem;
   }
 
   /* Line the first icon up with the paragraph above */
   .links2 {
     margin-left: -10px;
+  }
+
+  /* Record player: turntable on the left, now playing + sleeve stack on the right */
+  .record-player {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    gap: 40px;
+    align-items: center;
+  }
+
+  .turntable {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 4 / 3;
+  }
+
+  .turntable-base,
+  .tonearm {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .tonearm {
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .tonearm-arm {
+    transform-box: view-box;
+    transition: transform 0.8s ease;
+  }
+
+  .turntable-label {
+    font: 10px 'Roboto Mono', monospace;
+    fill: #6b6b6b;
+  }
+
+  /* The drop target, sized and placed over the platter by RecordPlayer.js */
+  .platter {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: box-shadow 0.2s ease;
+  }
+
+  /* Ring around the platter while a record is dragged over it */
+  .platter.is-over {
+    box-shadow: 0 0 0 4px #f5f5f3, 0 0 0 5px #111;
+  }
+
+  .platter-record {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    animation: record-drop 0.35s ease-out;
+  }
+
+  .platter-spin {
+    display: block;
+    width: 100%;
+    height: 100%;
+    animation: record-spin 1.8s linear infinite; /* 33 1/3 rpm */
+  }
+
+  .platter-spin.is-paused {
+    animation-play-state: paused;
+  }
+
+  .vinyl {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes record-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes record-drop {
+    from {
+      transform: scale(1.08);
+      opacity: 0.5;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .turntable-button {
+    position: absolute;
+    left: 3.5%;
+    bottom: 5%;
+    z-index: 3;
+    padding: 3px 12px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #111;
+    background: #fff;
+    border: 1px solid #111;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .turntable-button:hover:not(:disabled) {
+    background: #111;
+    color: #fff;
+  }
+
+  .turntable-button:disabled {
+    opacity: 0.4;
+  }
+
+  .record-side {
+    container-type: inline-size; /* lets the sleeve fan size itself to this column */
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .now-playing {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-height: 152px; /* room for the full details, so nothing below jumps when a record starts */
+  }
+
+  .now-playing-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: #6b6b6b;
+  }
+
+  .now-playing-title {
+    font-family: 'Merriweather', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .now-playing-meta {
+    font-size: 0.8rem;
+    color: #333;
+  }
+
+  /* Seek bar: a thin line you can drag or click to jump around the track */
+  .seek {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+  }
+
+  .seek-play {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    color: #111;
+    background: #fff;
+    border: 1px solid #111;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
+  }
+
+  .seek-play:hover {
+    color: #fff;
+    background: #111;
+  }
+
+  .seek-play:focus-visible {
+    outline: 1px solid #111;
+    outline-offset: 2px;
+  }
+
+  .seek-bar {
+    flex: 1;
+    height: 16px;
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .seek-bar:disabled {
+    cursor: default;
+  }
+
+  .seek-bar::-webkit-slider-runnable-track {
+    height: 2px;
+    background: linear-gradient(to right, #111 var(--pct), var(--line) var(--pct));
+  }
+
+  .seek-bar::-moz-range-track {
+    height: 2px;
+    background: linear-gradient(to right, #111 var(--pct), var(--line) var(--pct));
+  }
+
+  .seek-bar::-webkit-slider-thumb {
+    width: 12px;
+    height: 12px;
+    margin-top: -5px;
+    border: none;
+    border-radius: 50%;
+    background: #111;
+    -webkit-appearance: none;
+  }
+
+  .seek-bar::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 50%;
+    background: #111;
+  }
+
+  .seek-bar:focus-visible {
+    outline: 1px solid #111;
+    outline-offset: 4px;
+  }
+
+  .seek-time {
+    font-size: 0.75rem;
+    color: #6b6b6b;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  /* Title and year printed on the record label; they're what make the spin visible */
+  .vinyl-label-title {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 4px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    fill: #111;
+  }
+
+  .vinyl-label-year {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 3px;
+    fill: #6b6b6b;
+  }
+
+  /* Sleeves fanned on an arc like a hand of cards. Each sleeve rotates around a shared point
+     far below the fan; hovering one spreads the others away from it. */
+  .sleeve-fan {
+    --sleeve-size: min(170px, 27cqi); /* the fan (up to about 3.6 sleeves wide when spread) always fits its column */
+    position: relative;
+    width: calc(var(--sleeve-size) * 3.2);
+    height: calc(var(--sleeve-size) * 1.4 + 8px);
+    margin: 0 auto;
+  }
+
+  .sleeve {
+    position: absolute;
+    top: 8px;
+    left: calc(50% - var(--sleeve-size) / 2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: var(--sleeve-size);
+    height: var(--sleeve-size);
+    padding: 10px 12px;
+    text-align: left;
+    color: #111;
+    background: var(--sleeve-color);
+    border: 1px solid #111;
+    border-radius: 3px;
+    cursor: pointer;
+    touch-action: none; /* lets touch gestures pick, scrub, and drag instead of scrolling the page */
+    transform-origin: 50% calc(var(--sleeve-size) * 3.5);
+    transform: rotate(var(--fan-angle));
+    transition: transform 0.45s cubic-bezier(0.22, 0.8, 0.3, 1);
+  }
+
+  /* The selected sleeve: its neighbours swing away to reveal it (angles set in RecordPlayer.js) */
+  .sleeve.is-active {
+    cursor: grab;
+  }
+
+  .sleeve.is-active:active {
+    cursor: grabbing;
+  }
+
+  .sleeve:focus-visible {
+    outline: 1px solid #111;
+    outline-offset: 3px;
+  }
+
+  /* Title with the "playing" tag underneath, so the tag never covers the date */
+  .sleeve-top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .sleeve-title {
+    font-family: 'Merriweather', serif;
+    font-size: calc(var(--sleeve-size) * 0.12);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .sleeve-date {
+    font-size: calc(var(--sleeve-size) * 0.075);
+  }
+
+  .sleeve-playing {
+    padding: 1px 5px;
+    font-size: calc(var(--sleeve-size) * 0.07);
+    color: #fff;
+    background: #111;
+    border-radius: 2px;
+  }
+
+  /* The record pulled out of its sleeve, following the pointer */
+  .dragging-record {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25));
+  }
+
+  /* Phones and tablets: turntable on top, then now playing, then the sleeves */
+  @media (max-width: 991.98px) {
+    .record-player {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+    }
+
+    .turntable {
+      width: 85%; /* a little smaller than full width on phones and tablets */
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
   }
