@@ -1,24 +1,4 @@
-.link-icon {
-    margin: 0 10px; /* Adjust the spacing as needed */
-    transition: transform 0.3s, filter 0.3s;
-    color: inherit; /* Ensure icons inherit text color */
-  }
-  
-  .link-icon:hover {
-    transform: scale(1.2); /* Scale up the icon */
-    filter: brightness(2); /* Increase the brightness */
-  }
-  
-  .music-card {
-    border: 1px solid #ddd;
-    transition: transform 0.3s ease;
-  }
-  
-  .music-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .card-title {
+.card-title {
   
     font-size: 1.25rem;
   }
@@ -36,4 +16,8 @@
   .audio-player {
     width: 100%;
   }
-  
+
+  /* Line the first icon up with the paragraph above */
+  .links2 {
+    margin-left: -10px;
+  }

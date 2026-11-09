@@ -1,18 +1,9 @@
-.project-card {
-    transition: transform 0.3s ease;
-    border: 1px solid black !important; /* Ensure the border is applied */
-  }
-  
-  .project-card:hover {
-    transform: scale(1.05);
-  }
-  
-  .project-title {
-    font-weight: bold !important; /* Ensure the font-weight is applied */
+.project-title {
+    font-weight: bold;
   }
   
   .card-img-top {
     height: 250px; /* Adjust height as needed */
     object-fit: cover; /* Maintain aspect ratio, crop if necessary */
+    border-bottom: 1px solid var(--line);
   }
-  

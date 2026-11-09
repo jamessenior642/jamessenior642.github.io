@@ -1,35 +1,51 @@
 .timeline {
-    border-left: 1px solid hsl(0, 0%, 90%);
+    border-left: 1px solid var(--line);
     position: relative;
     list-style: none;
     padding-left: 20px;
   }
-  
+
   .timeline .timeline-item {
     position: relative;
     padding-left: 40px;
   }
-  
+
+  /* Past roles get an outlined dot */
   .timeline .timeline-item:after {
     position: absolute;
     display: block;
-    top: 0;
-    left: -26px;
-    background-color: hsl(0, 0%, 90%);
+    top: 6px;
+    left: -27px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border: 2px solid var(--accent);
     border-radius: 50%;
-    height: 11px;
-    width: 11px;
+    height: 12px;
+    width: 12px;
     content: "";
+  }
+
+  /* Current role gets a filled dot */
+  .timeline .timeline-item:first-child:after {
+    background-color: var(--accent);
   }
   
   .fw-bold {
     font-weight: bold;
   }
   
+  /* Company, with dates on their own line underneath */
+  .timeline-header {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+  }
+
   .worktitle {
 
     font-size: 1rem;
     font-weight: 500;
-    margin-top: 5px;
+    margin-top: 4px;
+    margin-bottom: 6px;
   }
   

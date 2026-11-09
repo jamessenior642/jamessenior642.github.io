@@ -41,15 +41,15 @@ const Music = () => {
       <p className="project-description">
         My other love in life is, and has been, music. I used to play the trumpet in band through high school, and now I dabble in music production and DJing. I use Ableton Live for production, and Serato for DJing. Here are a few things I've made, enjoy...
       </p>
-      <div className="links2 text-center mt-4 mb-5">
+      <div className="links2 mt-4 mb-5">
         <a href="https://soundcloud.com/james-senior-495564782" target="_blank" rel="noopener noreferrer" className="link-icon">
-          <FaSoundcloud size={32} />
+          <FaSoundcloud size={30} />
         </a>
         <a href="https://www.instagram.com/seniorcitizen___/" target="_blank" rel="noopener noreferrer" className="link-icon">
-          <FaInstagram size={32} />
+          <FaInstagram size={30} />
         </a>
         <a href="https://open.spotify.com/user/james_senior?si=f0cd6967398149d0" target="_blank" rel="noopener noreferrer" className="link-icon">
-          <FaSpotify size={32} />
+          <FaSpotify size={30} />
         </a>
       </div>
       <Row>

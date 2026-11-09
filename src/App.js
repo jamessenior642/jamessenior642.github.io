@@ -15,8 +15,8 @@ function App() {
         <CustomNavbar />
         <Home />
         <About />
-        <Projects />
         <WorkExperience />
+        <Projects />
         <Music />
         <Footer />
       </div>

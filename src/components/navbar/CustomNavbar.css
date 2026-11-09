@@ -1,6 +1,9 @@
 /* Center align nav links when collapsed */
-.navbar {
-    border-bottom: 1px solid black; /* Thin black border at the bottom */
+.site-navbar {
+    background-color: rgba(245, 245, 243, 0.85); /* --surface, slightly see-through */
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--ink); /* Thin black border at the bottom */
   }
 
 .navbar-collapse {
@@ -50,3 +53,7 @@
     cursor: pointer;
   }
   
+
+  .nav-link.active {
+    font-weight: bold;
+  }

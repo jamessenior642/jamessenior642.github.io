@@ -9,8 +9,19 @@
     filter: brightness(2); /* Increase the brightness */
   }
   
+  /* Fill the visible screen. svh accounts for in-app browser toolbars (e.g. Instagram),
+     and the top padding keeps content clear of the fixed navbar. */
+  .home-hero {
+    min-height: 100vh;
+    min-height: 100svh;
+    padding-top: 58px;
+    padding-bottom: 16px;
+  }
+
   .photo {
     border-radius: 50%; /* Optional: Make the image round */
+    width: auto;
+    height: min(335px, 40svh); /* Full size on most screens, shrinks on short ones */
   }
 
   .subheading {
@@ -65,3 +76,28 @@
     animation: animated-text 3s steps(22, end) 1s 1 normal both, animated-cursor 800ms steps(22, end) 1s 5;
   }
   
+  .home-name {
+    font-size: 50px;
+  }
+
+  /* Short screens (phones in landscape, in-app browsers like Instagram) */
+  @media (max-height: 600px) {
+    .home-name {
+      font-size: 40px;
+      margin-bottom: 4px;
+    }
+
+    .subheading {
+      font-size: 1.1em;
+      max-width: 90%;
+      margin-bottom: 8px;
+    }
+
+    .type {
+      margin-bottom: 8px;
+    }
+
+    .home-hero .links {
+      margin-top: 12px !important; /* overrides Bootstrap's mt-4 */
+    }
+  }

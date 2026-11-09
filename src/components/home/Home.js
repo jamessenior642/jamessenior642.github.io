@@ -3,7 +3,7 @@ import { Container } from 'react-bootstrap';
 import jamesImage from '../../pics/James_1 (1).jpg';
 import jamesRight from '../../pics/James_2.jpg';
 import jamesLeft from '../../pics/James_3.jpg';
-import { FaEnvelope, FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 import './Home.css'; // Import the CSS file
 
 const Home = () => {
@@ -25,12 +25,12 @@ const Home = () => {
   return (
     <Container 
       fluid 
-      className="d-flex flex-column align-items-center justify-content-center fade-in" 
-      style={{ height: '100vh', textAlign: 'center' }}
+      className="home-hero d-flex flex-column align-items-center justify-content-center fade-in"
+      style={{ textAlign: 'center' }}
       onMouseMove={handleMouseMove}
     >
-      <h1 style={{ fontFamily: 'Merriweather', fontSize: '50px' }}>James Senior</h1>
-      <p className="subheading">I'm a Computer Science graduate from Northeastern University.</p>
+      <h1 className="home-name" style={{ fontFamily: 'Merriweather' }}>James Senior</h1>
+      <p className="subheading">I'm a software engineer in QA, based in New York.</p>
       <div><p className="type">Welcome to my website.</p></div>
       <img
         className="photo"
@@ -47,9 +47,6 @@ const Home = () => {
         </a>
         <a href="https://www.linkedin.com/in/james-senior-5b9a99205/" target="_blank" rel="noopener noreferrer" className="link-icon">
           <FaLinkedin size={30} />
-        </a>
-        <a href="https://www.instagram.com/jamessenior__/" target="_blank" rel="noopener noreferrer" className="link-icon">
-          <FaInstagram size={30} />
         </a>
       </div>
     </Container>

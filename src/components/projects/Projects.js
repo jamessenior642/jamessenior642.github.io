@@ -121,6 +121,7 @@ const Projects = () => {
                     href={project.link}
                     target="_blank"
                     className="stretched-link"
+                    aria-label={`${project.title} on GitHub`}
                     rel="noopener noreferrer"
                   ></a>
                   <Card.Img
@@ -156,7 +157,7 @@ const Projects = () => {
           </p>
           <div className="d-grid gap-2">
             <Button
-              variant="primary"
+              variant="dark"
               href="https://newssumm.netlify.app"  // <-- Update to your actual live site
               target="_blank"
               rel="noopener noreferrer"
@@ -164,7 +165,7 @@ const Projects = () => {
               Visit Website
             </Button>
             <Button
-              variant="secondary"
+              variant="outline-dark"
               href="https://github.com/jamessenior642/newsfeed-frontend"
               target="_blank"
               rel="noopener noreferrer"
@@ -172,7 +173,7 @@ const Projects = () => {
               Frontend Repo
             </Button>
             <Button
-              variant="secondary"
+              variant="outline-dark"
               href="https://github.com/jamessenior642/newsfeed-backend"
               target="_blank"
               rel="noopener noreferrer"
