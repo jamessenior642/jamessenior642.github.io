@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.0ff9780f.css",
+    "main.css": "/static/css/main.04921fac.css",
     "main.js": "/static/js/main.3fcae35f.js",
     "static/js/725.facf435a.chunk.js": "/static/js/725.facf435a.chunk.js",
     "static/js/453.195b869a.chunk.js": "/static/js/453.195b869a.chunk.js",
@@ -22,14 +22,14 @@
     "static/media/freecell2.jpg": "/static/media/freecell2.d5958b7aab093081302e.jpg",
     "static/media/concentrationpic2.jpg": "/static/media/concentrationpic2.6984ed0542cac7c571fc.jpg",
     "index.html": "/index.html",
-    "main.0ff9780f.css.map": "/static/css/main.0ff9780f.css.map",
+    "main.04921fac.css.map": "/static/css/main.04921fac.css.map",
     "main.3fcae35f.js.map": "/static/js/main.3fcae35f.js.map",
     "725.facf435a.chunk.js.map": "/static/js/725.facf435a.chunk.js.map",
     "453.195b869a.chunk.js.map": "/static/js/453.195b869a.chunk.js.map",
     "241.f5dbb524.chunk.js.map": "/static/js/241.f5dbb524.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0ff9780f.css",
+    "static/css/main.04921fac.css",
     "static/js/main.3fcae35f.js"
   ]
 }
