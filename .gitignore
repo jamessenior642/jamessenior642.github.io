@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Source font for scripts/make-logo-font.mjs (download instructions in that script)
+/scripts/*.ttf

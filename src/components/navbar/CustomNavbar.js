@@ -1,7 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { HashLink as Link } from 'react-router-hash-link';
+import StaticLogo from './StaticLogo';
 import './CustomNavbar.css'; // Ensure this file is imported
+
+// three.js is large, so the 3D logo loads separately after the page renders
+const ChromeLogo = lazy(() => import('./ChromeLogo'));
 
 const sections = [
   { id: 'about', label: 'about' },
@@ -52,9 +56,20 @@ const CustomNavbar = () => {
     <Navbar fixed="top" expand="lg" variant="light" expanded={expanded} className="site-navbar">
       <Container>
         <Navbar.Brand href="#">
-          <h3 className="spinningname" id="name" style={{ fontFamily: 'Merriweather', fontSize: '25px', margin: '0' }}>JS</h3>
+          <Suspense fallback={<StaticLogo />}>
+            <ChromeLogo />
+          </Suspense>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleToggle} />
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          aria-expanded={expanded}
+          onClick={handleToggle}
+          className={`site-toggler${expanded ? ' is-open' : ''}`}
+        >
+          {/* Two lines that turn into an X when the menu is open */}
+          <span className="site-toggler-line" />
+          <span className="site-toggler-line" />
+        </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             {sections.map(({ id, label }) => (

@@ -1,6 +1,6 @@
 .body-section {
     padding-bottom: 24px;
-    scroll-margin-top: 48px; /* Breathing room below the fixed navbar when jumping to a section */
+    scroll-margin-top: calc(var(--nav-h) - 11px); /* Breathing room below the fixed navbar when jumping to a section */
 
      /* Adjust as needed for equal spacing above and below the section */
   }

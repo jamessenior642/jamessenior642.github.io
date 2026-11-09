@@ -43,13 +43,11 @@ const WorkExperience = () => {
       <Container className="py-2">
         <ul className="timeline">
           {workExperienceData.map((experience, index) => (
-            <li className="timeline-item mb-4" key={index}>
-              <div className="timeline-header">
-                <h5 className="fw-bold mb-0">{experience.company}</h5>
-                <span className="text-muted fw-bold">{experience.date}</span>
-              </div>
+            <li className="timeline-item" key={index}>
+              <h5 className="timeline-company">{experience.company}</h5>
+              <p className="timeline-date">{experience.date}</p>
               <p className="worktitle">{experience.title}</p>
-              <p className="mb-0">{experience.description}</p>
+              <p className="timeline-description">{experience.description}</p>
             </li>
           ))}
         </ul>

@@ -1,51 +1,76 @@
 .timeline {
-    border-left: 1px solid var(--line);
     position: relative;
     list-style: none;
-    padding-left: 20px;
+    padding-left: 0;
+    margin: 0;
   }
 
   .timeline .timeline-item {
     position: relative;
-    padding-left: 40px;
+    padding-left: 36px;
+    padding-bottom: 28px;
   }
 
-  /* Past roles get an outlined dot */
-  .timeline .timeline-item:after {
-    position: absolute;
-    display: block;
-    top: 6px;
-    left: -27px;
-    box-sizing: border-box;
-    background-color: #fff;
-    border: 2px solid var(--accent);
-    border-radius: 50%;
-    height: 12px;
-    width: 12px;
+  .timeline .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+
+  /* Dot: yellow with a thin black outline, lined up with the company name */
+  .timeline .timeline-item::before {
     content: "";
+    position: absolute;
+    top: 5px;
+    left: 0;
+    box-sizing: border-box;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    border: 1px solid var(--ink);
+    z-index: 1;
   }
 
-  /* Current role gets a filled dot */
-  .timeline .timeline-item:first-child:after {
-    background-color: var(--accent);
+  /* Current role gets a soft halo */
+  .timeline .timeline-item:first-child::before {
+    box-shadow: 0 0 0 4px rgba(248, 208, 0, 0.3);
   }
-  
-  .fw-bold {
-    font-weight: bold;
+
+  /* Line: runs from each dot down to the next one, and stops at the last role */
+  .timeline .timeline-item::after {
+    content: "";
+    position: absolute;
+    top: 17px;
+    bottom: -5px;
+    left: 5.5px;
+    width: 1px;
+    background-color: #cfcfcf;
   }
-  
-  /* Company, with dates on their own line underneath */
-  .timeline-header {
-    display: flex;
-    flex-direction: column;
-    row-gap: 4px;
+
+  .timeline .timeline-item:last-child::after {
+    display: none;
+  }
+
+  .timeline-company {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .timeline-date {
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    color: #6b6b6b;
+    margin: 2px 0 8px;
   }
 
   .worktitle {
-
     font-size: 1rem;
     font-weight: 500;
-    margin-top: 4px;
-    margin-bottom: 6px;
+    margin: 0 0 4px;
   }
-  
+
+  .timeline-description {
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+  }

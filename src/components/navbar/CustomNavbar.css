@@ -18,33 +18,34 @@
     display: inline-block;
     width: 100%;
     text-align: center;
+    font-size: clamp(1rem, 0.4vw + 0.7rem, 1.2rem); /* grows slightly with the logo on big screens */
   }
 
   
-@keyframes spin {
-    from {
-      transform: rotateY(0deg);
-    }
-    to {
-      transform: rotateY(-360deg);
-    }
+/* Center the logo instead of sitting it on the text baseline, which added stray space below it */
+  .site-navbar .navbar-brand {
+    display: flex;
+    align-items: center;
   }
-  
-  @keyframes depth {
-    0%, 50%, 100% {
-      text-shadow: 0 0 black;
-    }
-    25% {
-      text-shadow: 1px 0 black, 2px 0 black, 3px 0 black, 4px 0 black, 5px 0 black, 6px 0 black, 7px 0 black, 8px 0 black, 9px 0 black, 10px 0 black;
-    }
-    75% {
-      text-shadow: -1px 0 black, -2px 0 black, -3px 0 black, -4px 0 black, -5px 0 black, -6px 0 black, -7px 0 black, -8px 0 black, -9px 0 black, -10px 0 black;
-    }
+
+/* 3D chrome logo (three.js canvas) */
+  .chrome-logo {
+    display: inline-flex;
+    align-items: center;
+    height: var(--logo-h);
   }
-  
-  .spinningname {
-    display: inline-block;
-    animation: spin 5s linear infinite, depth 5s linear infinite;
+
+  .chrome-logo canvas {
+    display: block;
+  }
+
+  /* Plain-text placeholder while the 3D logo loads */
+  .static-logo {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: calc(var(--logo-h) * 0.78);
+    line-height: var(--logo-h);
+    color: var(--ink);
   }
   
   
@@ -56,4 +57,58 @@
 
   .nav-link.active {
     font-weight: bold;
+  }
+
+  /* Extra space between links on large screens; laptops and phones stay as they were */
+  @media (min-width: 992px) {
+    .site-navbar .navbar-nav {
+      gap: clamp(0px, 1.25vw - 16px, 16px);
+    }
+  }
+
+  /* Menu button on small screens: two thin lines that turn into an X when open */
+  .site-navbar .site-toggler {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 7px;
+    width: 44px;
+    height: 40px; /* no taller than the logo area, so the navbar height stays the same */
+    padding: 0 10px;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  .site-navbar .site-toggler:focus {
+    box-shadow: none;
+  }
+
+  .site-navbar .site-toggler:focus-visible {
+    outline: 1px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  .site-toggler-line {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background-color: var(--ink);
+    transition: transform 0.25s ease;
+  }
+
+  /* Lines are 7px apart, so each moves 4.25px to meet in the middle */
+  .site-toggler.is-open .site-toggler-line:first-child {
+    transform: translateY(4.25px) rotate(45deg);
+  }
+
+  .site-toggler.is-open .site-toggler-line:last-child {
+    transform: translateY(-4.25px) rotate(-45deg);
+  }
+
+  /* Wide screens show the links inline, so hide the button (overrides display: flex above) */
+  @media (min-width: 992px) {
+    .site-navbar .site-toggler {
+      display: none;
+    }
   }
