@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.769af664.css",
-    "main.js": "/static/js/main.3fcae35f.js",
+    "main.css": "/static/css/main.a9b48c73.css",
+    "main.js": "/static/js/main.b3eb7958.js",
     "static/js/725.facf435a.chunk.js": "/static/js/725.facf435a.chunk.js",
     "static/js/453.195b869a.chunk.js": "/static/js/453.195b869a.chunk.js",
     "static/js/241.f5dbb524.chunk.js": "/static/js/241.f5dbb524.chunk.js",
@@ -20,16 +20,18 @@
     "static/media/bridgitpic2.jpeg": "/static/media/bridgitpic2.1abf0e91003cc4b7243b.jpeg",
     "static/media/websitepic3.jpg": "/static/media/websitepic3.6cbbd44573fd320e25c9.jpg",
     "static/media/freecell2.jpg": "/static/media/freecell2.d5958b7aab093081302e.jpg",
+    "static/media/sleeve-crumple-1.jpg": "/static/media/sleeve-crumple-1.10b1ae403c7f63134af2.jpg",
+    "static/media/sleeve-crumple-2.jpg": "/static/media/sleeve-crumple-2.d828799465dbb8c6c2e7.jpg",
     "static/media/concentrationpic2.jpg": "/static/media/concentrationpic2.6984ed0542cac7c571fc.jpg",
     "index.html": "/index.html",
-    "main.769af664.css.map": "/static/css/main.769af664.css.map",
-    "main.3fcae35f.js.map": "/static/js/main.3fcae35f.js.map",
+    "main.a9b48c73.css.map": "/static/css/main.a9b48c73.css.map",
+    "main.b3eb7958.js.map": "/static/js/main.b3eb7958.js.map",
     "725.facf435a.chunk.js.map": "/static/js/725.facf435a.chunk.js.map",
     "453.195b869a.chunk.js.map": "/static/js/453.195b869a.chunk.js.map",
     "241.f5dbb524.chunk.js.map": "/static/js/241.f5dbb524.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.769af664.css",
-    "static/js/main.3fcae35f.js"
+    "static/css/main.a9b48c73.css",
+    "static/js/main.b3eb7958.js"
   ]
 }
