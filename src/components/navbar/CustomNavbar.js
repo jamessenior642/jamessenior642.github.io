@@ -55,7 +55,7 @@ const CustomNavbar = () => {
   return (
     <Navbar fixed="top" expand="lg" variant="light" expanded={expanded} className="site-navbar">
       <Container>
-        <Navbar.Brand href="#">
+        <Navbar.Brand href="#" aria-label="Back to top">
           <Suspense fallback={<StaticLogo />}>
             <ChromeLogo />
           </Suspense>

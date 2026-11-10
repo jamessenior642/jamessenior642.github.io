@@ -6,7 +6,7 @@ import './About.css'
 const About = () => {
   return (
     <BodySection id="about" title="ABOUT ME">
-      <p className="project-description">
+      <p>
         Hello there. My name is James Senior (if you couldn't tell). 
         I'm a QA Engineer at SafeinHome, based in New York, where I spend my days making sure our software works the way it's supposed to.
         I graduated from Northeastern University in 2024 with a Bachelor of Science in Computer Science.
@@ -15,7 +15,7 @@ const About = () => {
       </p>
       <Row>
         <Col sm={6}>
-          <h4 className='bold-header'>Facts:</h4>
+          <h3 className='bold-header'>Facts</h3>
           <ul>
             <li>Born in: Manhattan</li>
             <li>From: Northport, NY (Long Island)</li>
@@ -25,7 +25,7 @@ const About = () => {
           </ul>
         </Col>
         <Col sm={6}>
-          <h4 className='bold-header'>Things I Enjoy:</h4>
+          <h3 className='bold-header'>Things I Enjoy</h3>
           <ul>
             <li>Computers</li>
             <li>Music (producing or listening)</li>

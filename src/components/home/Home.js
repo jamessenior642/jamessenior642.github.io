@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
-import jamesImage from '../../pics/James_1 (1).jpg';
-import jamesRight from '../../pics/James_2.jpg';
-import jamesLeft from '../../pics/James_3.jpg';
+import jamesImage from '../../pics/web/james-1.webp';
+import jamesRight from '../../pics/web/james-2.webp';
+import jamesLeft from '../../pics/web/james-3.webp';
 import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
 import './Home.css'; // Import the CSS file
 
@@ -62,13 +62,13 @@ const Home = () => {
         alt="James Senior"
       />
       <div className="links mt-4">
-        <a href="mailto:senior.j@northeastern.edu" target="_blank" rel="noopener noreferrer" className="link-icon">
+        <a href="mailto:senior.j@northeastern.edu" target="_blank" rel="noopener noreferrer" className="link-icon" aria-label="Email">
           <FaEnvelope size={30} />
         </a>
-        <a href="https://github.com/jamessenior642" target="_blank" rel="noopener noreferrer" className="link-icon">
+        <a href="https://github.com/jamessenior642" target="_blank" rel="noopener noreferrer" className="link-icon" aria-label="GitHub">
           <FaGithub size={30} />
         </a>
-        <a href="https://www.linkedin.com/in/james-senior-5b9a99205/" target="_blank" rel="noopener noreferrer" className="link-icon">
+        <a href="https://www.linkedin.com/in/james-senior-5b9a99205/" target="_blank" rel="noopener noreferrer" className="link-icon" aria-label="LinkedIn">
           <FaLinkedin size={30} />
         </a>
       </div>

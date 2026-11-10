@@ -1,5 +1,7 @@
+/* Sized like the other item titles (company and project names) */
 .bold-header {
   font-family: inherit;
+  font-size: 1.15rem;
     font-weight: bold;
     margin-top: 20px;
   }

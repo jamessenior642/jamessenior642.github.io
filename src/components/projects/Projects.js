@@ -1,188 +1,159 @@
 import React, { useState } from 'react';
-import { Row, Col, Card, Modal, Button } from 'react-bootstrap';
 import BodySection from '../bodysection/BodySection';
 import './Projects.css'; // Import the CSS file
 
-import freecellImage from '../../pics/freecell2.jpg';
-import bridgitImage from '../../pics/bridgitpic2.jpeg';
-import concentrationImage from '../../pics/concentrationpic2.jpg';
-import froggerImage from '../../pics/froggerpic2.jpg';
-import websiteImage from '../../pics/websitepic3.jpg';
-import coveyImg from '../../pics/covey.png';
-import ytclone from '../../pics/ytclone2.jpeg';
-import jmarket from '../../pics/jmarket2.jpeg';
-import news from '../../pics/news.jpg';
+// Resized, compressed WebP copies of the screenshots (originals are kept in src/pics)
+import news from '../../pics/web/news.webp';
+import ytclone from '../../pics/web/ytclone.webp';
+import coveyImg from '../../pics/web/covey.webp';
+import jmarket from '../../pics/web/jmarket.webp';
+import freecellImage from '../../pics/web/freecell.webp';
+import bridgitImage from '../../pics/web/bridgit.webp';
+import concentrationImage from '../../pics/web/concentration.webp';
+import froggerImage from '../../pics/web/frogger.webp';
 
-const projectData = [
+const PER_PAGE = 4;
+
+// Newest first, so page 1 is recent work and page 2 is earlier class projects.
+// The first link is where the image itself goes; imgCrop trims screenshots that include browser UI.
+const projects = [
   {
     title: 'AI News Summarizer',
-    description: 'Created a website that summarizes news articles. The user can input a URL and the website will return a summary of the article created by a custom AI model.',
+    description: 'Paste in a news article\'s URL and get a summary from a BART model I fine-tuned on news data.',
+    tech: 'Python, TypeScript, React, Node.js, MongoDB, AWS',
+    year: '2025',
     imgSrc: news,
-    // We won't use `link` here, because we want a modal instead
-    tech: 'Typescript, React, Node.js, MongoDB, AWS, Python | January 2025',
+    links: [
+      { label: 'live site', href: 'https://newssumm.netlify.app' },
+      { label: 'frontend', href: 'https://github.com/jamessenior642/newsfeed-frontend' },
+      { label: 'backend', href: 'https://github.com/jamessenior642/newsfeed-backend' },
+    ],
   },
   {
     title: 'YouTube Clone',
-    description: 'Created a basic clone of YouTube, where the user can upload videos in their Google account.',
+    description: 'A video platform where you sign in with Google and upload your own videos.',
+    tech: 'TypeScript, Firebase, Google Cloud Run',
+    year: '2024',
     imgSrc: ytclone,
-    link: 'https://github.com/jamessenior642/youtube-clone',
-    tech: 'Typescript, Firebase, Google Cloud Run | September 2024',
+    imgCrop: { objectPosition: 'center 63%' }, // start below the browser's tabs and address bar
+    links: [{ label: 'code', href: 'https://github.com/jamessenior642/youtube-clone' }],
   },
   {
-    title: 'Covey.town Drawing',
-    description: 'Added a drawing feature to the online social platform Covey.town, as well as adding a multiplayer game.',
+    title: 'Covey.Town Drawing',
+    description: 'Added a drawing canvas and a shared gallery to Covey.Town, a virtual social space.',
+    tech: 'TypeScript, React, Node.js',
+    year: '2024',
     imgSrc: coveyImg,
-    link: 'https://github.com/neu-cs4530/spring24-project-team-101',
-    tech: 'Typescript, React | April 2024',
+    links: [{ label: 'code', href: 'https://github.com/neu-cs4530/spring24-project-team-101' }],
   },
   {
-    title: 'Jungle Market Website',
-    description: 'Final project for WebDev. Allows user to browse products, and leave reviews on them.',
+    title: 'Jungle Market',
+    description: 'An online marketplace for browsing products and leaving reviews.',
+    tech: 'React, Node.js, MongoDB',
+    year: '2023',
     imgSrc: jmarket,
-    link: 'https://github.com/jamessenior642/webdev-final-project',
-    tech: 'React, Node.js, MongoDB | April 2023',
+    imgCrop: { transform: 'scale(1.2)', transformOrigin: 'center bottom' }, // zoom past the browser bar
+    links: [{ label: 'code', href: 'https://github.com/jamessenior642/webdev-final-project' }],
   },
   {
-    title: 'Freecell',
-    description: 'Created a version of the card game Freecell. Used the Model-View-Controller design scheme.',
+    title: 'FreeCell',
+    description: 'The solitaire card game, built around a model-view-controller design.',
+    tech: 'Java',
+    year: '2022',
     imgSrc: freecellImage,
-    link: 'https://github.com/jamessenior642/Freecell',
-    tech: 'Java | February 2022',
+    links: [{ label: 'code', href: 'https://github.com/jamessenior642/Freecell' }],
   },
   {
     title: 'Bridgit',
-    description: 'Created a version of the game Bridgit. A two player game where the first player to fill a path across the board wins.',
+    description: 'A two-player board game: the first player to build a path across the board wins.',
+    tech: 'Java',
+    year: '2021',
     imgSrc: bridgitImage,
-    link: 'https://github.com/jamessenior642/Bridgit',
-    tech: 'Java | November 2021',
+    links: [{ label: 'code', href: 'https://github.com/jamessenior642/Bridgit' }],
   },
   {
     title: 'Concentration',
-    description: 'Created a version of the card game Concentration. The player must remove all of the cards in the deck by removing pairs of cards.',
+    description: 'The memory card game: clear the deck by finding matching pairs.',
+    tech: 'Java',
+    year: '2021',
     imgSrc: concentrationImage,
-    link: 'https://github.com/jamessenior642/Concentration',
-    tech: 'Java | October 2021',
+    links: [{ label: 'code', href: 'https://github.com/jamessenior642/Concentration' }],
   },
   {
     title: 'Frogger',
-    description: 'Created a version of Frogger. The player must cross a set of obstacles and reach the other side to win.',
+    description: 'The arcade classic: get across the road and the river to the other side.',
+    tech: 'Racket',
+    year: '2021',
     imgSrc: froggerImage,
-    link: 'https://github.com/jamessenior642/Frogger',
-    tech: 'Racket ISL | June 2021',
-  },
-  {
-    title: 'My Website',
-    description: 'Very meta of me. Created a personal website to display my portfolio as well as my personality.',
-    imgSrc: websiteImage,
-    link: 'https://github.com/jamessenior642/jamessenior642.github.io',
-    tech: 'React | January 2022',
+    links: [{ label: 'code', href: 'https://github.com/jamessenior642/Frogger' }],
   },
 ];
 
-const Projects = () => {
-  // State to control News Summarizer modal
-  const [showNewsModal, setShowNewsModal] = useState(false);
+const pageCount = Math.ceil(projects.length / PER_PAGE);
 
-  // Handlers for showing/hiding the News Summarizer modal
-  const handleShowNewsModal = () => setShowNewsModal(true);
-  const handleCloseNewsModal = () => setShowNewsModal(false);
+const Projects = () => {
+  const [page, setPage] = useState(0);
+  const pages = Array.from({ length: pageCount }, (_, i) => projects.slice(i * PER_PAGE, (i + 1) * PER_PAGE));
 
   return (
     <BodySection id="projects" title="PROJECTS">
-      <Row>
-        {projectData.map((project, index) => {
-          // For the news summarizer project, we open a modal instead of using a link
-          if (project.title === 'AI News Summarizer') {
-            return (
-              <Col xs={12} sm={6} md={4} className="mb-4" key={index}>
-                <Card className="h-100 project-card" onClick={handleShowNewsModal} style={{ cursor: 'pointer' }}>
-                  <Card.Img
-                    variant="top"
-                    src={project.imgSrc}
-                    alt={`${project.title} Project`}
-                    className="card-img-top"
-                  />
-                  <Card.Body>
-                    <Card.Title className="project-title">{project.title}</Card.Title>
-                    <Card.Text>{project.description}</Card.Text>
-                  </Card.Body>
-                  <Card.Footer>
-                    <small className="text-muted">Used: {project.tech}</small>
-                  </Card.Footer>
-                </Card>
-              </Col>
-            );
-          } else {
-            // For all other projects, keep the anchor approach
-            return (
-              <Col xs={12} sm={6} md={4} className="mb-4" key={index}>
-                <Card className="h-100 project-card">
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    className="stretched-link"
-                    aria-label={`${project.title} on GitHub`}
-                    rel="noopener noreferrer"
-                  ></a>
-                  <Card.Img
-                    variant="top"
-                    src={project.imgSrc}
-                    alt={`${project.title} Project`}
-                    className="card-img-top"
-                  />
-                  <Card.Body>
-                    <Card.Title className="project-title">{project.title}</Card.Title>
-                    <Card.Text>{project.description}</Card.Text>
-                  </Card.Body>
-                  <Card.Footer>
-                    <small className="text-muted">Used: {project.tech}</small>
-                  </Card.Footer>
-                </Card>
-              </Col>
-            );
-          }
-        })}
-      </Row>
-
-      {/* MODAL FOR NEWS SUMMARIZER */}
-      <Modal show={showNewsModal} onHide={handleCloseNewsModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>AI News Summarizer</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>
-            This project summarizes news articles based on an AI model I trained using Python. You
-            can visit the live website or check out the front-end and back-end
-            repositories below.  Note that you need to log in to submit a summary.
-          </p>
-          <div className="d-grid gap-2">
-            <Button
-              variant="dark"
-              href="https://newssumm.netlify.app"  // <-- Update to your actual live site
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Visit Website
-            </Button>
-            <Button
-              variant="outline-dark"
-              href="https://github.com/jamessenior642/newsfeed-frontend"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Frontend Repo
-            </Button>
-            <Button
-              variant="outline-dark"
-              href="https://github.com/jamessenior642/newsfeed-backend"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Backend Repo
-            </Button>
+      {/* Every page is laid out in the same spot and only the current one is shown, so the section
+          keeps the height of the tallest page and the page buttons don't jump when switching */}
+      <div className="project-page-stack">
+        {pages.map((pageProjects, i) => (
+          <div
+            key={i}
+            className={`project-grid${i === page ? ' is-current' : ''}`}
+            aria-hidden={i !== page}
+            inert={i !== page ? '' : undefined}
+          >
+            {pageProjects.map((project) => (
+              <article className="project" key={project.title}>
+                {/* The screenshot, printed newspaper-style; hovering fades it back to the original */}
+                <a
+                  className="project-print"
+                  href={project.links[0].href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${project.title}: ${project.links[0].label}`}
+                >
+                  <img src={project.imgSrc} alt="" style={project.imgCrop} />
+                </a>
+                <h3 className="project-name">{project.title}</h3>
+                <p className="project-blurb">{project.description}</p>
+                <p className="project-meta">
+                  <span>{project.tech}</span>
+                  <span>{project.year}</span>
+                </p>
+                <p className="project-links">
+                  {project.links.map((link) => (
+                    <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer">
+                      {link.label} ↗
+                    </a>
+                  ))}
+                </p>
+              </article>
+            ))}
           </div>
-        </Modal.Body>
-      </Modal>
+        ))}
+      </div>
+
+      <nav className="project-pages" aria-label="Project pages">
+        <button type="button" onClick={() => setPage(page - 1)} disabled={page === 0} aria-label="Previous page">‹</button>
+        {Array.from({ length: pageCount }, (_, i) => (
+          <button
+            key={i}
+            type="button"
+            className={i === page ? 'is-current' : ''}
+            onClick={() => setPage(i)}
+            aria-label={`Page ${i + 1}`}
+            aria-current={i === page ? 'page' : undefined}
+          >
+            {i + 1}
+          </button>
+        ))}
+        <button type="button" onClick={() => setPage(page + 1)} disabled={page === pageCount - 1} aria-label="Next page">›</button>
+      </nav>
     </BodySection>
   );
 };

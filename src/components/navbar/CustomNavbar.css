@@ -1,11 +1,13 @@
-/* Center align nav links when collapsed */
 .site-navbar {
-    background-color: rgba(245, 245, 243, 0.85); /* --surface, slightly see-through */
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    /* Bootstrap's navbar link colours, set to the site's muted grey and ink */
+    --bs-navbar-color: var(--muted);
+    --bs-navbar-hover-color: var(--ink);
+    --bs-navbar-active-color: var(--ink);
+    background-color: var(--surface);
     border-bottom: 1px solid var(--ink); /* Thin black border at the bottom */
   }
 
+/* Center align nav links when collapsed */
 .navbar-collapse {
     justify-content: center;
   }
@@ -52,6 +54,19 @@
   
   .nav-link {
     cursor: pointer;
+    transition: color var(--t-quick);
+  }
+
+  /* Bootstrap's blue focus glow, replaced by the site-wide ink outline */
+  .site-navbar .nav-link:focus,
+  .site-navbar .navbar-toggler:focus {
+    box-shadow: none;
+  }
+
+  /* Bootstrap also removes the outline on nav links, so put the site-wide one back */
+  .site-navbar .nav-link:focus-visible {
+    outline: 1px solid var(--ink);
+    outline-offset: 3px;
   }
   
 
@@ -94,7 +109,7 @@
     width: 24px;
     height: 1.5px;
     background-color: var(--ink);
-    transition: transform 0.25s ease;
+    transition: transform var(--t-quick) ease;
   }
 
   /* Lines are 7px apart, so each moves 4.25px to meet in the middle */

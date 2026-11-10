@@ -1,9 +1,188 @@
-.project-title {
-    font-weight: bold;
+/* Projects: a gallery of "prints" with a label underneath, no cards or borders */
+/* All pages share one grid cell; the tallest sets the height, only the current one shows */
+.project-page-stack {
+    display: grid;
   }
-  
-  .card-img-top {
-    height: 250px; /* Adjust height as needed */
-    object-fit: cover; /* Maintain aspect ratio, crop if necessary */
+
+  .project-grid {
+    grid-area: 1 / 1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-content: start;
+    gap: 56px 40px;
+    visibility: hidden;
+  }
+
+  .project-grid.is-current {
+    visibility: visible;
+    animation: project-page-in 0.4s ease;
+  }
+
+  @keyframes project-page-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* The screenshot printed like a newspaper photo: black and white on warm newsprint, with fine
+     paper grain and a faint halftone dot screen. Both textures are drawn by the browser (SVG
+     noise and a CSS dot pattern), so they stay sharp at any screen resolution. Hovering fades
+     the paper, grain, and dots away and brings back the original full-colour screenshot. */
+  .project-print {
+    position: relative;
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    isolation: isolate; /* keep the blend modes inside the print */
+    background-color: #e6e1d5; /* newsprint */
+    transition: background-color var(--t-slow) ease;
+  }
+
+  .project-print img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: grayscale(1) contrast(1.08);
+    mix-blend-mode: multiply; /* white in the screenshot becomes the newsprint tone */
+    transition: filter var(--t-slow) ease;
+  }
+
+  .project-print::before,
+  .project-print::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    transition: opacity var(--t-slow) ease;
+  }
+
+  /* Fine paper grain */
+  .project-print::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+    opacity: 0.45;
+  }
+
+  /* Halftone dot screen, like a photo printed in a newspaper */
+  .project-print::after {
+    background-image: radial-gradient(circle, rgba(17, 17, 17, 0.5) 0 0.55px, transparent 0.9px);
+    background-size: 3px 3px;
+    mix-blend-mode: multiply;
+    opacity: 0.2;
+  }
+
+  .project:hover .project-print,
+  .project-print:focus-visible {
+    background-color: #fff;
+  }
+
+  .project:hover .project-print img,
+  .project-print:focus-visible img {
+    filter: grayscale(0) contrast(1);
+  }
+
+  .project:hover .project-print::before,
+  .project:hover .project-print::after,
+  .project-print:focus-visible::before,
+  .project-print:focus-visible::after {
+    opacity: 0;
+  }
+
+  .project-print:focus-visible {
+    outline: 1px solid var(--ink);
+    outline-offset: 4px;
+  }
+
+  /* The gallery label */
+  /* Item titles are Roboto Mono bold, matching the Work Experience company names;
+     Merriweather is kept for the page and section headings */
+  .project-name {
+    margin: 18px 0 6px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  .project-blurb {
+    margin: 0 0 10px;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--text-soft);
+  }
+
+  /* Tech on the left (wrapping if it's long), year pinned to the right of the first line */
+  .project-meta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+    gap: 12px;
+    margin: 0 0 6px;
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin: 0;
+    font-size: var(--text-sm);
+  }
+
+  .project-links a {
+    color: var(--ink);
+    text-decoration: none;
     border-bottom: 1px solid var(--line);
+    transition: border-color var(--t-quick);
+  }
+
+  .project-links a:hover {
+    border-color: var(--ink);
+  }
+
+  /* Page controls: ‹ 1 2 › */
+  .project-pages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: 44px;
+  }
+
+  .project-pages button {
+    min-width: 28px;
+    padding: 2px 6px;
+    font-family: 'Roboto Mono', monospace;
+    font-size: var(--text-sm);
+    color: var(--muted);
+    background: none;
+    border: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .project-pages button:hover:not(:disabled) {
+    color: var(--ink);
+  }
+
+  .project-pages button.is-current {
+    color: var(--ink);
+    font-weight: 700;
+    border-bottom-color: var(--ink);
+  }
+
+  .project-pages button:disabled {
+    opacity: 0.25;
+  }
+
+  /* Phones: one per row */
+  @media (max-width: 767.98px) {
+    .project-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 44px;
+    }
   }

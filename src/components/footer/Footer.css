@@ -1,7 +1,7 @@
 
 .bottom-text {
     font-size: 1rem;
-    color: #333;
+    color: var(--text-soft);
   }
 
   /* Keep the credit on one line at every screen size. It's 48 characters of Roboto Mono, and

@@ -254,7 +254,7 @@ const RecordPlayer = ({ tracks }) => {
     <div className="record-player">
       <div className="turntable">
         <svg className="turntable-base" viewBox="0 0 400 300" aria-hidden="true">
-          <rect x="0.5" y="0.5" width="399" height="299" rx="10" fill="#f5f5f3" stroke="#111" />
+          <rect x="0.5" y="0.5" width="399" height="299" fill="#f5f5f3" stroke="#111" />
           <circle cx={PLATTER.cx} cy={PLATTER.cy} r={PLATTER.r + 6} fill="#e6e6e3" stroke="#111" strokeWidth="0.75" />
           <circle cx={PLATTER.cx} cy={PLATTER.cy} r={PLATTER.r} fill="#1c1c1c" />
           {[100, 80, 60].map((r) => (
@@ -312,7 +312,8 @@ const RecordPlayer = ({ tracks }) => {
         </button>
       </div>
 
-      <div className="record-side">
+      {/* is-empty: no record loaded, so now playing collapses and the sleeve fan takes its space */}
+      <div className={`record-side${track ? '' : ' is-empty'}`}>
         <div className="now-playing" aria-live="polite">
           {track ? (
             <>

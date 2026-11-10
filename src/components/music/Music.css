@@ -1,20 +1,4 @@
-/* Card text sizes (these apply site-wide, including the Projects cards) */
-.card-title {
-
-    font-size: 1.25rem;
-  }
-
-  .card-text {
-
-    font-size: 1rem;
-  }
-
-  .card-footer {
-
-    font-size: 0.875rem;
-  }
-
-  /* Line the first icon up with the paragraph above */
+/* Line the first icon up with the paragraph above */
   .links2 {
     margin-left: -10px;
   }
@@ -50,12 +34,12 @@
 
   .tonearm-arm {
     transform-box: view-box;
-    transition: transform 0.8s ease;
+    transition: transform var(--t-slow) ease;
   }
 
   .turntable-label {
     font: 10px 'Roboto Mono', monospace;
-    fill: #6b6b6b;
+    fill: var(--muted);
   }
 
   /* The drop target, sized and placed over the platter by RecordPlayer.js */
@@ -66,7 +50,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    transition: box-shadow 0.2s ease;
+    transition: box-shadow var(--t-quick) ease;
   }
 
   /* Ring around the platter while a record is dragged over it */
@@ -129,14 +113,14 @@
     z-index: 3;
     padding: 0.2em 0.9em;
     font-family: 'Roboto Mono', monospace;
-    font-size: clamp(9px, 2.6cqi, 0.8rem);
+    font-size: clamp(9px, 2.6cqi, var(--text-xs));
     line-height: 1.4;
     font-weight: 500;
     color: #111;
     background: #fff;
     border: 1px solid #111;
-    border-radius: 4px;
-    transition: background-color 0.2s, color 0.2s;
+    border-radius: 0; /* square, like the sleeves */
+    transition: background-color var(--t-quick), color var(--t-quick);
   }
 
   .turntable-button:hover:not(:disabled) {
@@ -155,28 +139,40 @@
     gap: 28px;
   }
 
+  /* Room for the full details while a record is loaded, so nothing below jumps around mid-song.
+     With no record it collapses to the one-line hint and the sleeve fan moves up into the space;
+     both directions animate so the change reads as a response to loading or lifting a record. */
   .now-playing {
     display: flex;
     flex-direction: column;
     gap: 2px;
-    min-height: 152px; /* room for the full details, so nothing below jumps when a record starts */
+    min-height: 152px;
+    max-height: 220px;
+    overflow: hidden;
+    transition: min-height var(--t-slow) ease, max-height var(--t-slow) ease;
+  }
+
+  .record-side.is-empty .now-playing {
+    min-height: 0;
+    max-height: 1.5rem;
   }
 
   .now-playing-label {
-    font-size: 0.75rem;
+    font-size: var(--text-xs);
     letter-spacing: 0.02em;
-    color: #6b6b6b;
+    color: var(--muted);
   }
 
+  /* Item title: Roboto Mono bold, like the project and company names */
   .now-playing-title {
-    font-family: 'Merriweather', serif;
-    font-size: 1.25rem;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1.15rem;
     font-weight: 700;
   }
 
   .now-playing-meta {
-    font-size: 0.8rem;
-    color: #333;
+    font-size: var(--text-sm);
+    color: var(--text-soft);
   }
 
   /* Seek bar: a thin line you can drag or click to jump around the track */
@@ -199,7 +195,7 @@
     background: #fff;
     border: 1px solid #111;
     border-radius: 50%;
-    transition: background-color 0.2s, color 0.2s;
+    transition: background-color var(--t-quick), color var(--t-quick);
   }
 
   .seek-play:hover {
@@ -260,8 +256,8 @@
   }
 
   .seek-time {
-    font-size: 0.75rem;
-    color: #6b6b6b;
+    font-size: var(--text-xs);
+    color: var(--muted);
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
   }
@@ -279,7 +275,7 @@
   .vinyl-label-year {
     font-family: 'Roboto Mono', monospace;
     font-size: 3px;
-    fill: #6b6b6b;
+    fill: var(--muted);
   }
 
   /* Sleeves fanned on an arc like a hand of cards. Each sleeve rotates around a shared point
@@ -290,6 +286,19 @@
     width: calc(var(--sleeve-size) * 3.2);
     height: calc(var(--sleeve-size) * 1.4 + 8px);
     margin: 0 auto;
+    transition: transform var(--t-slow) ease;
+  }
+
+  /* With no record loaded the fan grows into the freed-up space (side-by-side layout only;
+     on phones and tablets it just moves up) */
+  @media (min-width: 992px) {
+    .sleeve-fan {
+      transform-origin: 50% 0; /* grow downward, keeping clear of the hint text above */
+    }
+
+    .record-side.is-empty .sleeve-fan {
+      transform: scale(1.25);
+    }
   }
 
   .sleeve {
@@ -320,7 +329,7 @@
     touch-action: none; /* lets touch gestures pick, scrub, and drag instead of scrolling the page */
     transform-origin: 50% calc(var(--sleeve-size) * 3.5);
     transform: rotate(var(--fan-angle));
-    transition: transform 0.45s cubic-bezier(0.22, 0.8, 0.3, 1);
+    transition: transform var(--t-slow) cubic-bezier(0.22, 0.8, 0.3, 1);
   }
 
   /* The selected sleeve: its neighbours swing away to reveal it (angles set in RecordPlayer.js) */
@@ -415,9 +424,9 @@
   .sleeve-playing {
     padding: 1px 5px;
     font-size: calc(var(--sleeve-size) * 0.07);
-    /* The inverse of its sleeve: ink-coloured tag with the sleeve colour as text */
-    color: var(--sleeve-color);
-    background: var(--sleeve-ink, #111);
+    /* The same black tag on every sleeve */
+    color: #fff;
+    background: var(--ink);
     border-radius: 0;
   }
 
