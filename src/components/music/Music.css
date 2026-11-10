@@ -304,10 +304,18 @@
     height: var(--sleeve-size);
     padding: 10px 12px;
     text-align: left;
-    color: #111;
+    color: var(--sleeve-ink, #111); /* black, or cream on the dark sleeve */
     background: var(--sleeve-color);
-    border: 1px solid #111;
-    border-radius: 3px;
+    /* Edge in the sleeve's own colour, a bit darker, so it holds its shape against the white page */
+    border: 1px solid var(--sleeve-color);
+    border-color: color-mix(in srgb, var(--sleeve-color) 72%, #000);
+    border-radius: 0; /* square, like a cut-out */
+    /* Flat, like a paper cut-out in a collage (no drop shadow); just darkened inner edges
+       like handled cardboard */
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+      inset 0 0 calc(var(--sleeve-size) * 0.14) rgba(0, 0, 0, 0.2);
+    overflow: hidden;
     cursor: pointer;
     touch-action: none; /* lets touch gestures pick, scrub, and drag instead of scrolling the page */
     transform-origin: 50% calc(var(--sleeve-size) * 3.5);
@@ -330,6 +338,64 @@
   }
 
   /* Title with the "playing" tag underneath, so the tag never covers the date */
+  /* Worn-sleeve texture, from photos of real record sleeves (src/pics/textures):
+     ::before is crumpled paper (neutral grey, blended with overlay so it shades the colour
+     without darkening it); ::after is white scratches and frayed edges on black (blended with
+     screen, so the black disappears and only the wear shows). */
+  .sleeve::before,
+  .sleeve::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .sleeve::before {
+    background-image: var(--sleeve-crumple);
+    mix-blend-mode: overlay;
+    opacity: 0.75;
+    transform: var(--crumple-turn);
+  }
+
+  .sleeve::after {
+    background-image: url('../../pics/textures/sleeve-wear.jpg');
+    mix-blend-mode: screen;
+    transform: var(--wear-turn);
+  }
+
+  /* Each sleeve gets a different texture and orientation, so no two look identical */
+  .sleeve:nth-child(1) {
+    --sleeve-crumple: url('../../pics/textures/sleeve-crumple-1.jpg');
+    --crumple-turn: none;
+    --wear-turn: none;
+  }
+
+  .sleeve:nth-child(2) {
+    --sleeve-crumple: url('../../pics/textures/sleeve-crumple-2.jpg');
+    --crumple-turn: rotate(90deg);
+    --wear-turn: scaleX(-1);
+  }
+
+  .sleeve:nth-child(3) {
+    --sleeve-crumple: url('../../pics/textures/sleeve-crumple-1.jpg');
+    --crumple-turn: scaleX(-1);
+    --wear-turn: rotate(180deg);
+  }
+
+  .sleeve:nth-child(4) {
+    --sleeve-crumple: url('../../pics/textures/sleeve-crumple-2.jpg');
+    --crumple-turn: rotate(180deg);
+    --wear-turn: scaleY(-1);
+  }
+
+  /* Text sits above the texture layers */
+  .sleeve-top {
+    position: relative;
+    z-index: 1;
+  }
+
   .sleeve-top {
     display: flex;
     flex-direction: column;
@@ -337,23 +403,22 @@
     gap: 5px;
   }
 
+  /* Each title has its own display font (set per track in Music.js), in white */
   .sleeve-title {
-    font-family: 'Merriweather', serif;
-    font-size: calc(var(--sleeve-size) * 0.12);
-    font-weight: 700;
-    line-height: 1.1;
-  }
-
-  .sleeve-date {
-    font-size: calc(var(--sleeve-size) * 0.075);
+    font-family: var(--title-font, 'Merriweather', serif);
+    font-size: calc(var(--sleeve-size) * 0.15 * var(--title-scale, 1));
+    font-weight: 400;
+    line-height: 1.05;
+    color: #fff;
   }
 
   .sleeve-playing {
     padding: 1px 5px;
     font-size: calc(var(--sleeve-size) * 0.07);
-    color: #fff;
-    background: #111;
-    border-radius: 2px;
+    /* The inverse of its sleeve: ink-coloured tag with the sleeve colour as text */
+    color: var(--sleeve-color);
+    background: var(--sleeve-ink, #111);
+    border-radius: 0;
   }
 
   /* The record pulled out of its sleeve, following the pointer */

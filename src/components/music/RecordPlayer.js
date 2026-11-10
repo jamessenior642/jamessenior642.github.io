@@ -374,6 +374,9 @@ const RecordPlayer = ({ tracks }) => {
                 className={`sleeve${isActive ? ' is-active' : ''}`}
                 style={{
                   '--sleeve-color': t.color,
+                  '--sleeve-ink': t.textColor || '#111',
+                  '--title-font': t.titleFont,
+                  '--title-scale': t.titleScale || 1,
                   '--fan-angle': `${fanAngle(index)}deg`,
                   zIndex: index + 1, // stacking order never changes; the fan spreads instead
                 }}
@@ -385,7 +388,6 @@ const RecordPlayer = ({ tracks }) => {
                   <span className="sleeve-title">{t.title}</span>
                   {current === index && <span className="sleeve-playing">playing</span>}
                 </span>
-                <span className="sleeve-date">{t.date}</span>
               </button>
             );
           })}

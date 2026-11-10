@@ -15,7 +15,10 @@ const musicData = [
     date: 'July 2021',
     samples: 'September Rain by Makoto Matsushita',
     audioSrc: makobeat,
-    color: '#1E9E5A', // green
+    color: '#5B3A29', // chocolate brown
+    textColor: '#F3EAD8', // cream, since black text wouldn't read on the dark sleeve
+    titleFont: "'Pirata One', serif", // blackletter
+    titleScale: 1.15,
   },
   {
     title: 'Days',
@@ -23,13 +26,17 @@ const musicData = [
     samples: 'Ayonha by Hamid Al Shaeri',
     audioSrc: mamabeat2,
     color: '#E0362C', // red
+    titleFont: "'Permanent Marker', cursive", // hand-drawn marker
+    titleScale: 0.95,
   },
   {
     title: 'Softly',
     date: 'December 2021',
     samples: 'Killing Me Softly With His Song by Roberta Flack',
     audioSrc: softly,
-    color: '#4A73F0', // blue (light enough for black text on the sleeve)
+    color: '#2D5BE3', // blue
+    titleFont: "'Rubik Dirt', sans-serif", // distressed bold
+    titleScale: 0.95,
   },
   {
     title: 'Goodluv',
@@ -37,6 +44,8 @@ const musicData = [
     samples: 'Good Love by Anita Baker',
     audioSrc: goodlove,
     color: '#F8D000', // yellow, same as the site accent
+    titleFont: "'Sedgwick Ave Display', cursive", // graffiti
+    titleScale: 1.1,
   },
 ];
 
